@@ -1,0 +1,584 @@
+{
+    "PES": {
+        "COLUMNS_NAMES": [
+            "pfk_per",
+            "pfk_pro",
+            "fk_pac",
+            "fk_ins",
+            "fk_noi",
+            "fk_ace",
+            "fk_sac",
+            "edad",
+            "correo"
+        ],
+        "COLUMNS_TYPES": [
+            "str",
+            "int",
+            "int",
+            "int",
+            "int",
+            "int",
+            "int",
+            "int",
+            "str"
+        ]
+    },
+    "PER": {
+        "COLUMNS_NAMES": [
+            "pk_pid",
+            "pid_type",
+            "nombres",
+            "apellidos"
+        ],
+        "COLUMNS_TYPES": [
+            "str",
+            "str",
+            "str",
+            "str"
+        ]
+    },
+    "PES_PRBI": {
+        "COLUMNS_NAMES": [
+            "pfk_per",
+            "pfk_pro",
+            "pfk_bpr",
+            "pfk_pac",
+            "n_seq",
+            "observaciones"
+        ],
+        "COLUMNS_TYPES": [
+            "str",
+            "int",
+            "int",
+            "int",
+            "int",
+            "str"
+        ]
+    },
+    "PES_ADPR": {
+        "COLUMNS_NAMES": [
+            "fk_pac",
+            "fk_per",
+            "fk_pro",
+            "n_ingles",
+            "n_lectoescritura",
+            "n_matematicas",
+            "p_ciencias",
+            "p_imagen",
+            "p_matematicas",
+            "p_sociales",
+            "p_textos",
+            "p_total",
+            "tipo_pin",
+            "tipo_aspirante",
+            "observaciones"
+        ],
+        "COLUMNS_TYPES": [
+            "int",
+            "str",
+            "int",
+            "str",
+            "str",
+            "str",
+            "str",
+            "str",
+            "str"
+        ]
+    },
+    "PES_ESTA": {
+        "COLUMNS_NAMES": [
+            "fk_per",
+            "fk_pro",
+            "fk_pac",
+            "fk_ees",
+            "papa",
+            "prom_redo",
+            "prom_real",
+            "num_matriculas"
+        ],
+        "COLUMNS_TYPES": [
+            "str",
+            "int",
+            "int",
+            "str",
+            "int",
+            "int",
+            "int",
+            "int"
+        ]
+    },
+    "PES_MATE": {
+        "COLUMNS_NAMES": [
+            "pfk_per",
+            "pfk_pac",
+            "pfk_pro",
+            "pfk_mat",
+            "fk_grupo",
+            "fk_dpa",
+            "fk_ins",
+            "tipologia",
+            "tipo_asignatura",
+            "calificacion_cuantitativa",
+            "calificacion_cualitativa",
+            "observaciones"
+        ],
+        "COLUMNS_TYPES": [
+            "str",
+            "int",
+            "int",
+            "int",
+            "str",
+            "int",
+            "int",
+            "str",
+            "str",
+            "int",
+            "str",
+            "str"
+        ]
+    },
+    "MAT": {
+        "COLUMNS_NAMES": [
+            "pk_id",
+            "fk_ror",
+            "nom",
+            "cre",
+            "cat_espe"
+        ],
+        "COLUMNS_TYPES": [
+            "int",
+            "int",
+            "str",
+            "int",
+            "str"
+        ]
+    },
+    "MAT_OAGR": {
+        "COLUMNS_NAMES": [
+            "pfk_mat",
+            "pfk_dpa",
+            "pfk_pac",
+            "pk_grupo",
+            "cupo",
+            "inscritos"
+        ],
+        "COLUMNS_TYPES": [
+            "int",
+            "int",
+            "int",
+            "str",
+            "str",
+            "str"
+        ]
+    },
+    "PES_EGRE": {
+        "COLUMNS_NAMES": [
+            "pfk_per",
+            "pfk_pro",
+            "fk_pac_ultm",
+            "cant_pac"
+        ],
+        "COLUMNS_TYPES": [
+            "str",
+            "int",
+            "int",
+            "int"
+        ]
+    },
+    "PES_TUTA": {
+        "COLUMNS_NAMES": [
+            "fk_per",
+            "fk_pro",
+            "fk_esp",
+            "fk_mat",
+            "fk_pac",
+            "fec"
+        ],
+        "COLUMNS_TYPES": [
+            "str",
+            "int",
+            "int",
+            "int",
+            "int",
+            "str"
+        ]
+    },
+    "INS": {
+        "COLUMNS_NAMES": [
+            "pk_id",
+            "fk_pai",
+            "tipo",
+            "nom_ori",
+            "nom_esp",
+            "nom_ing",
+            "siglas"
+        ],
+        "COLUMNS_TYPES": [
+            "int",
+            "int",
+            "str",
+            "str",
+            "str",
+            "str",
+            "str"
+        ]
+    },
+    "PRC": {
+        "COLUMNS_NAMES": [
+            "fk_pro",
+            "cob",
+            "cti",
+            "fir",
+            "ini",
+            "fin",
+            "esta",
+            "fk_ins"
+        ],
+        "COLUMNS_TYPES": [
+            "int",
+            "str",
+            "str",
+            "str",
+            "str",
+            "str",
+            "str",
+            "int"
+        ]
+    },
+    "PES_EPMP": {
+        "COLUMNS_NAMES": [
+            "fk_per",
+            "fk_pro",
+            "fk_pac",
+            "fk_idm",
+            "fec_ini",
+            "fec_fin"
+        ],
+        "COLUMNS_TYPES": [
+            "str",
+            "int",
+            "int",
+            "int",
+            "str",
+            "str"
+        ]
+    },
+    "PER_CATI": {
+        "COLUMNS_NAMES": [
+            "pfk_mat",
+            "pfk_pac",
+            "pfk_per",
+            "fk_ins",
+            "rol"
+        ],
+        "COLUMNS_TYPES": [
+            "int",
+            "int",
+            "str",
+            "int",
+            "str"
+        ]
+    },
+    "MAT_CATI": {
+        "COLUMNS_NAMES": [
+            "pfk_mat",
+            "pfk_pac",
+            "fk_pro",
+            "nom",
+            "fec_inicio",
+            "fec_fin",
+            "objetivos",
+            "tematica",
+            "duracion_dias",
+            "duracion_meses"
+        ],
+        "COLUMNS_TYPES": [
+            "int",
+            "int",
+            "int",
+            "str",
+            "str",
+            "str",
+            "str",
+            "str",
+            "int",
+            "int"
+        ]
+    },
+    "PER_ODSQ": {
+        "COLUMNS_NAMES": [
+            "fk_per",
+            "fk_qpr",
+            "fk_qar",
+            "fk_qob",
+            "empresa",
+            "descripcion",
+            "cdp",
+            "tipo_ods",
+            "num_ods",
+            "fecha"
+        ],
+        "COLUMNS_TYPES": [
+            "str",
+            "int",
+            "int",
+            "int",
+            "int",
+            "str",
+            "int",
+            "str",
+            "int",
+            "str"
+        ]
+    },
+    "PES_GRAD": {
+        "COLUMNS_NAMES": [
+            "pfk_per",
+            "pfk_pro",
+            "fk_pac_grad",
+            "fk_pac_ultm",
+            "fec_grado",
+            "diploma",
+            "libro",
+            "folio",
+            "acta",
+            "cre_exed",
+            "pac_ins",
+            "edad"
+        ],
+        "COLUMNS_TYPES": [
+            "str",
+            "int",
+            "int",
+            "int",
+            "str",
+            "int",
+            "int",
+            "int",
+            "int",
+            "int",
+            "int",
+            "int"
+        ]
+    },
+    "ACT": {
+        "COLUMNS_NAMES": [
+            "pk_id",
+            "year",
+            "num_act",
+            "fec"
+        ],
+        "COLUMNS_TYPES": [
+            "int",
+            "str",
+            "int",
+            "str"
+        ]
+    },
+    "ARA": {
+        "COLUMNS_NAMES": [
+            "pfk_per",
+            "pfk_pro",
+            "pfk_act",
+            "pk_acc",
+            "respuesta",
+            "observacion"
+        ],
+        "COLUMNS_TYPES": [
+            "str",
+            "int",
+            "int",
+            "str",
+            "str",
+            "str"
+        ]
+    },
+    "PES_ADPS": {
+        "COLUMNS_NAMES": [
+            "fk_per",
+            "fk_pro",
+            "fk_pac",
+            "credencial",
+            "resultado",
+            "tipo_admision",
+            "observaciones"
+        ],
+        "COLUMNS_TYPES": [
+            "str",
+            "int",
+            "int",
+            "str",
+            "str",
+            "str",
+            "str"
+        ]
+    },
+    "MAT_OADC": {
+        "COLUMNS_NAMES": [
+            "fk_pdc",
+            "fk_mat",
+            "fk_dpa",
+            "fk_pac",
+            "fk_grupo"
+        ],
+        "COLUMNS_TYPES": [
+            "str",
+            "int",
+            "int",
+            "int",
+            "str"
+        ]
+    },
+    "PER_PVIN": {
+        "COLUMNS_NAMES": [
+            "pfk_per",
+            "pfk_ror",
+            "pfk_pac",
+            "vin",
+            "actividad",
+            "observaciones"
+        ],
+        "COLUMNS_TYPES": [
+            "str",
+            "int",
+            "int",
+            "str",
+            "str",
+            "str"
+        ]
+    },
+    "PES_ACTI": {
+        "COLUMNS_NAMES": [
+            "fk_per",
+            "fk_pro",
+            "fk_res",
+            "fk_pac",
+            "fk_pai",
+            "fk_tae",
+            "prod",
+            "desc",
+            "fec_ini",
+            "fec_fin",
+            "ciudad",
+            "ambito",
+            "nom_evento",
+            "tip_asis",
+            "tip_part",
+            "cdp",
+            "virtual"
+        ],
+        "COLUMNS_TYPES": [
+            "str",
+            "int",
+            "int",
+            "int",
+            "int",
+            "int",
+            "str",
+            "str",
+            "str",
+            "str",
+            "str",
+            "str",
+            "str",
+            "str",
+            "str",
+            "str",
+            "int"
+        ]
+    },
+    "RES": {
+        "COLUMNS_NAMES": [
+            "pk_id",
+            "fk_dni",
+            "tipo",
+            "year",
+            "num",
+            "detalle"
+        ],
+        "COLUMNS_TYPES": [
+            "int",
+            "str",
+            "str",
+            "str",
+            "int",
+            "str"
+        ]
+    },
+    "PDC_ACTI": {
+        "COLUMNS_NAMES": [
+            "pfk_pdc",
+            "pfk_tae",
+            "pfk_pac",
+            "pfk_pai",
+            "fk_res",
+            "actividad_producto",
+            "desc",
+            "fec_inicio",
+            "fec_fin",
+            "duracion",
+            "ciudad",
+            "ambito",
+            "nom_evento_institucion",
+            "asistio_participo",
+            "tipo_participacion",
+            "cdp",
+            "virtual"
+        ],
+        "COLUMNS_TYPES": [
+            "str",
+            "int",
+            "int",
+            "int",
+            "int",
+            "str",
+            "str",
+            "str",
+            "str",
+            "int",
+            "str",
+            "str",
+            "str",
+            "str",
+            "str",
+            "str",
+            "int"
+        ]
+    },
+    "PES_RAGQ": {
+        "COLUMNS_NAMES": [
+            "fk_per",
+            "fk_pro",
+            "fk_qpr",
+            "fk_qar",
+            "fec",
+            "fk_qob",
+            "empresa",
+            "desc",
+            "cdp",
+            "res"
+        ],
+        "COLUMNS_TYPES": [
+            "str",
+            "int",
+            "int",
+            "int",
+            "str",
+            "int",
+            "str",
+            "str",
+            "int",
+            "int"
+        ]
+    },
+    "QPR": {
+        "COLUMNS_NAMES": [
+            "pk_id",
+            "desc"
+        ],
+        "COLUMNS_TYPES": [
+            "int",
+            "str"
+        ]
+    }
+}
