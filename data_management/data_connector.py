@@ -60,5 +60,10 @@ def write_not_found(err: set, insert: InsertConf, name: str):
 
 def write_tmp_file(name: str, data: pd.DataFrame) -> str:
     path = f'./data/tmp/{name}.csv.tmp'
-    data.to_csv(path, ';')
+    data.to_csv(path, ';', index=False)
     return path
+
+def read_equiv_table(name: str) -> pd.DataFrame:
+    csv = pd.read_csv(f'./data/equivalences/{name}.csv', header=None, sep=";", names=['old', 'new'], encoding='utf8', dtype=str)
+    print_message('CSV READED', csv)
+    return csv

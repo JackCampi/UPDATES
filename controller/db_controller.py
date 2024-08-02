@@ -5,6 +5,8 @@ from ..schema.PES import PES
 from ..schema.PDC import PDC
 from ..schema.QPR import QPR
 
+from ..model.table_key import TableKey
+
 def get_PER(db: Session):
     return db.query(PER).all()
 
@@ -77,3 +79,15 @@ def exists_in_pdc(db: Session, per: str) -> bool:
 
 def exists_in_qpr(db: Session, qpr: int) -> bool:
     return not(db.query(QPR).filter(QPR.pk_id == qpr).first() == None)
+
+def exists_key_in_table(db: Session, keys : list[TableKey], name: str) -> bool :
+    conditions = [f'{x.name} = "{x.value}"' for x in keys]
+    query = f'select * from {name} where {" and ".join(conditions)}'
+    result = db.execute(text(query))
+    return not(result.first() == None)
+
+def get_changable_keys_in_table(db: Session, keys : list[TableKey], name: str):
+    conditions = [f'{x.name} = "{x.value}"' for x in keys]
+    query = f'select * from {name} where {" and ".join(conditions)}'
+    result = db.execute(text(query))
+    return str(result.first())

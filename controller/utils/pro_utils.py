@@ -14,6 +14,7 @@ def __get_code(pro: pd.DataFrame,old: str):
     return  pro.loc[pro['old'].str.contains(old)]
 
 #TODO: optimize
+#TODO: chango for tables/equivalences/PRO
 def fix_carrers(column : pd.Series) -> list:
     pro = __read_carrear_codes()
     new_column = []

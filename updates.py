@@ -1,7 +1,9 @@
-from fastapi import FastAPI
+from fastapi import FastAPI, Request
+from fastapi.responses import JSONResponse
 from .router import inserter, tables, db, pro, tutorial, restore, qpr
 from .database import engine
 from .schema import PER, PES
+from .exception.equiv_error import EquivalenceError
 
 PER.Base.metadata.create_all(bind=engine)
 PES.Base.metadata.create_all(bind=engine)
@@ -15,7 +17,15 @@ app.include_router(tutorial.router)
 app.include_router(restore.router)
 app.include_router(qpr.router)
 
-
+@app.exception_handler(EquivalenceError)
+async def unicorn_exception_handler(request: Request, exc: EquivalenceError):
+    return JSONResponse(
+        status_code=418,
+        content={
+            "ERROR" : str(exc),
+            exc.name : exc.not_found
+        } ,
+    )
 
 @app.get("/")
 async def root():
