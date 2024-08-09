@@ -22,7 +22,14 @@ def __build_inserts(table: Table, insert: InsertConf, seq: pd.DataFrame, db: Ses
     PDC_ERRORS = set()
 
     for i in seq.index:
-        k_per = 'pfk_pdc' if 'pfk_pdc' in table.column_names else 'fk_pdc'
+        if 'pfk_pdc' in table.column_names:
+            k_per = 'pfk_pdc'
+        elif 'fk_pdc' in table.column_names:
+            k_per = 'fk_pdc'
+        elif 'pfk_per' in table.column_names:
+            k_per = 'pfk_per'
+        else:
+            k_per = 'fk_per'
         per = seq[k_per][i]
         if not exists_in_pdc(db, per):
             PDC_ERRORS.add(per)

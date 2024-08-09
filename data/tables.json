@@ -580,5 +580,21 @@
             "int",
             "str"
         ]
+    },
+    "PDC_CDIS": {
+        "COLUMNS_NAMES": [
+            "fk_per",
+            "fk_pac",
+            "fk_ins",
+            "nom",
+            "source"
+        ],
+        "COLUMNS_TYPES": [
+            "str",
+            "int",
+            "int",
+            "str",
+            "str"
+        ]
     }
 }

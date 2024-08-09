@@ -49,7 +49,7 @@ def __fix_column(column : pd.Series, name: str) -> list:
 #TODO: db unused
 def fix_column_with_equivalences(db: Session, bytes: bytes, name: str) -> str:
     data_str = bytes.decode('utf-8')
-    column = pd.read_csv(StringIO(data_str), names= [name], dtype= str)
+    column = pd.read_csv(StringIO(data_str), names= [name], dtype= str, sep=";")
     
     print_message('CSV READED', column)
 
