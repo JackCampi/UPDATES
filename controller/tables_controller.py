@@ -9,7 +9,7 @@ import pandas as pd
 from io import StringIO
 from ..utils.message import print_message
 from ..data_management.data_connector import write_tmp_file, read_equiv_table
-from .db_controller import exists_key_in_table, get_changable_keys_in_table
+from .db_controller import exists_key_in_table, get_changable_keys_in_table, run_command
 
 
 def get_all():
@@ -107,3 +107,18 @@ def check_table_keys(db: Session, bytes: bytes, name: str) -> str:
 
     return write_tmp_file(f'{name}_KEYS', table)
     
+def run_sql_in_table(db: Session, bytes: bytes):
+    data_str = bytes.decode('utf-8')
+    table = pd.read_csv(StringIO(data_str), dtype= str, sep=";", names=["cod"])
+    print_message('CSV READED', table)
+
+    new_column = []
+
+    for index in table.index:
+        result = run_command(db, table["cod"][index])
+        new_column.append(result)
+    
+    table["result"] = new_column
+    print_message('CMD LOADED', table)
+
+    return write_tmp_file('CMD', table)

@@ -4,7 +4,7 @@ from sqlalchemy.orm import Session
 from ..exception.equiv_error import EquivalenceError
 
 from ..database import get_db
-from ..controller.tables_controller import get_all, insert_table, table_exists, fix_column_with_equivalences, fix_table_with_equivalences, check_table_keys
+from ..controller.tables_controller import get_all, insert_table, table_exists, fix_column_with_equivalences, fix_table_with_equivalences, check_table_keys, run_sql_in_table
 from ..model.table import Table
 from ..model.tables_key_list import TableKeyList
 
@@ -52,3 +52,8 @@ async def equivtables(name: str, file: UploadFile, db: Session = Depends(get_db)
     #return keys
     contents = await file.read()
     return check_table_keys(db, contents, name)
+
+@router.post("/cmd")
+async def equivtables(file: UploadFile, db: Session = Depends(get_db)):
+    contents = await file.read()
+    return run_sql_in_table(db, contents)

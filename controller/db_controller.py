@@ -4,6 +4,7 @@ from ..schema.PER import PER
 from ..schema.PES import PES
 from ..schema.PDC import PDC
 from ..schema.QPR import QPR
+from ..schema.PRO import PRO
 
 from ..model.table_key import TableKey
 
@@ -41,6 +42,10 @@ def insert_pes(db: Session, pes: PES):
     db.commit()
     db.refresh(pes)
     return pes
+
+def run_command(db: Session, line: str):
+    result = db.execute(text(line))
+    return str(result.first())
 
 def run_script(db: Session, path: str):
     # Open the .sql file
@@ -91,3 +96,6 @@ def get_changable_keys_in_table(db: Session, keys : list[TableKey], name: str):
     query = f'select * from {name} where {" and ".join(conditions)}'
     result = db.execute(text(query))
     return str(result.first())
+
+def get_pro_name(db: Session, pro: str) -> str:
+    return db.query(PRO).filter(PRO.pk_id == pro).first().nom

@@ -13,7 +13,7 @@ async def read_items(db: Session = Depends(get_db)):
 
 @router.get("/{name}")
 async def read_items(name: str, db: Session = Depends(get_db)):
-    restore_table(db, name)
+    return restore_table(db, name)
 
 
 

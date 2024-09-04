@@ -18,7 +18,6 @@ def run_enrolled_checker(name: str, insert: InsertConf, db: Session) -> str:
     return out
 
 def __getFilter(pes, per, pro):
-    print(per)
     doc_filter = pes.loc[pes['DOCUMENTO'].str.contains(per)]
     #doc_filter['COD_PLAN']=doc_filter['COD_PLAN'].values.astype(str)
     pro_filter = doc_filter.loc[doc_filter['COD_PLAN'].str.contains(pro)]

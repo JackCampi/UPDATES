@@ -28,6 +28,7 @@ def __build_inserts(table: Table, insert: InsertConf, seq: pd.DataFrame) -> str:
     file = open(file_path, "w", encoding="utf-8")
     
     for i in seq.index:
+        
         statement = build_statement(table, insert, seq.iloc[[i]])
         file.write(statement)
     file.close()

@@ -67,3 +67,9 @@ def read_equiv_table(name: str) -> pd.DataFrame:
     csv = pd.read_csv(f'./data/equivalences/{name}.csv', header=None, sep=";", names=['old', 'new'], encoding='utf8', dtype=str)
     print_message('CSV READED', csv)
     return csv
+
+def read_not_found(insert: InsertConf, name: str) -> pd.DataFrame:
+    path = __build_in_folder_path(insert, name, 'NOTFOUND.csv')
+    csv = pd.read_csv(path, sep=";", names=['DOCUMENTO', 'COD_PROGRAMA'], dtype=str)
+    print_message("NOTFOUND READED", message=csv)
+    return csv

@@ -1,4 +1,5 @@
 import pandas as pd
+import copy
 from ..model.table import Table
 from ..model.insert_conf import InsertConf
 from ..data_management.data_connector import read_csv, build_try_sql_path, write_pes_errors
@@ -54,8 +55,8 @@ def __build_inserts(table: Table, insert: InsertConf, seq: pd.DataFrame, db: Ses
     return file_path
 
 def run_complete_pes_inserter(name: str, insert: InsertConf, check_carrer: bool, db: Session):
-    
     nseq = int(insert.seq) + 2
+    original_inserter = copy.deepcopy(insert)
 
     #0. remove tmp data
 
@@ -65,7 +66,6 @@ def run_complete_pes_inserter(name: str, insert: InsertConf, check_carrer: bool,
 
     #2. we check in enrolled students
     run_enrolled_checker(name, insert, db)
-
     #3. build PER statements
 
     insert.seq = "0"+str(nseq-2)
@@ -86,8 +86,8 @@ def run_complete_pes_inserter(name: str, insert: InsertConf, check_carrer: bool,
 
     #7. run again pes inserter & complete procedure
 
-    insert.seq = "0"+str(nseq)
-    final_path = run_pes_inserter(name, insert, db, check_carrer)
+    original_inserter.seq = "0"+str(nseq)
+    final_path = run_pes_inserter(name, original_inserter, db, check_carrer)
 
     return{
         "PER" : per_path,

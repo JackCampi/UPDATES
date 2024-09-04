@@ -596,5 +596,131 @@
             "str",
             "str"
         ]
+    },
+    "PES_PPOS": {
+        "COLUMNS_NAMES": [
+            "pk_id",
+            "fk_per",
+            "fk_pro",
+            "fk_ins",
+            "fk_act",
+            "fk_res",
+            "fk_pac_ini",
+            "fk_pac_fin",
+            "dependencia",
+            "fec_ini",
+            "fec_fin",
+            "observaciones"
+        ],
+        "COLUMNS_TYPES": [
+            "int",
+            "str",
+            "int",
+            "int",
+            "int",
+            "int",
+            "int",
+            "int",
+            "str",
+            "str",
+            "str",
+            "str"
+        ]
+    },
+    "PDC_VISI": {
+        "COLUMNS_NAMES": [
+            "pfk_res",
+            "pfk_pro",
+            "pfk_pac",
+            "pfk_pdc",
+            "pfk_ins",
+            "tipo_visitante",
+            "objetivos",
+            "resultados",
+            "duracion",
+            "actividad_especifica"
+        ],
+        "COLUMNS_TYPES": [
+            "int",
+            "int",
+            "int",
+            "str",
+            "int",
+            "str",
+            "str",
+            "str",
+            "int",
+            "str"
+        ]
+    },
+    "PES_TTGR": {
+        "COLUMNS_NAMES": [
+            "pfk_per",
+            "pfk_pro",
+            "pfk_pac",
+            "pfk_mat",
+            "fk_atg",
+            "fk_act",
+            "titulo",
+            "estado",
+            "pk_cot"
+        ],
+        "COLUMNS_TYPES": [
+            "str",
+            "int",
+            "int",
+            "int",
+            "int",
+            "int",
+            "str",
+            "str",
+            "int"
+        ]
+    },
+    "PES_RTGR": {
+        "COLUMNS_NAMES": [
+            "pfk_per",
+            "pfk_pro",
+            "pfk_mat",
+            "pfk_pac",
+            "pfk_per_rtgr",
+            "fk_act",
+            "rol",
+            "estado"
+        ],
+        "COLUMNS_TYPES": [
+            "str",
+            "int",
+            "int",
+            "int",
+            "str",
+            "int",
+            "str",
+            "str"
+        ]
+    },
+    "MAT_OAES": {
+        "COLUMNS_NAMES": [
+            "pfk_esp",
+            "pfk_mat",
+            "pfk_dpa",
+            "pfk_pac",
+            "pfk_grupo",
+            "dia",
+            "hora_inicio",
+            "hora_fin",
+            "hora_franja"
+        ],
+        "COLUMNS_TYPES": [
+            "int",
+            "int",
+            "int",
+            "int",
+            "str",
+            "int",
+            "str",
+            "str",
+            "int"
+        ]
     }
 }
