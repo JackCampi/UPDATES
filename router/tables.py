@@ -40,11 +40,6 @@ async def equiv(name: str, file: UploadFile, db: Session = Depends(get_db)):
 @router.post("/equivtable/{name}")
 async def equivtables(name: str, col_name: str, file: UploadFile, db: Session = Depends(get_db)):
     contents = await file.read()
-    #TODO: remove
-    """ try:
-        return fix_table_with_equivalences(db, contents, name, col_name)
-    except EquivalenceError as e:
-        raise e """
     return fix_table_with_equivalences(db, contents, name, col_name)
 
 @router.post("/keys/{name}")

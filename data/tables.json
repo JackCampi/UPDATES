@@ -722,5 +722,65 @@
             "str",
             "int"
         ]
+    },
+    "PDC_PROG": {
+        "COLUMNS_NAMES": [
+            "pfk_per",
+            "pfk_pro",
+            "pfk_pac",
+            "vinculacion",
+            "estudios"
+        ],
+        "COLUMNS_TYPES": [
+            "str",
+            "int",
+            "int",
+            "str",
+            "str"
+        ]
+    },
+    "GIV": {
+        "COLUMNS_NAMES": [
+            "pk_id",
+            "nombre",
+            "cod_colciencias",
+            "url_hermes",
+            "url_grupLAC",
+            "estado_hermes",
+            "facultad_externo"
+        ],
+        "COLUMNS_TYPES": [
+            "int",
+            "str",
+            "str",
+            "str",
+            "str",
+            "str",
+            "str"
+        ]
+    },
+    "GIV_MIEM": {
+        "COLUMNS_NAMES": [
+            "fk_per",
+            "fk_giv",
+            "fk_pac",
+            "rol"
+        ],
+        "COLUMNS_TYPES": [
+            "str",
+            "int",
+            "int",
+            "str"
+        ]
+    },
+    "GIV_PRO": {
+        "COLUMNS_NAMES": [
+            "pfk_giv",
+            "pfk_pro"
+        ],
+        "COLUMNS_TYPES": [
+            "int",
+            "int"
+        ]
     }
 }

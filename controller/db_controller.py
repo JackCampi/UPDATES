@@ -5,6 +5,7 @@ from ..schema.PES import PES
 from ..schema.PDC import PDC
 from ..schema.QPR import QPR
 from ..schema.PRO import PRO
+from ..utils.message import print_message
 
 from ..model.table_key import TableKey
 
@@ -48,6 +49,9 @@ def run_command(db: Session, line: str):
     return str(result.first())
 
 def run_script(db: Session, path: str):
+    #error log
+    err = []
+
     # Open the .sql file
     sql_file = open(path,'r', encoding="utf-8")
 
@@ -69,14 +73,20 @@ def run_script(db: Session, path: str):
                     db.commit()
 
                 # Assert in case of error
-                except:
-                    print('Ops')
-                    print(sql_command)
+                except Exception as e:
+                    msg = f'comand: {sql_command} \n err: {e}'
+                    print_message("OPS" , msg)
+                    err.append(sql_command)
 
                 # Finally, clear command string
                 finally:
                     sql_command = ''
     sql_file.close()
+    return {
+        "FINITI": True,
+        "ERR" : len(err),
+        "LOG": err
+    }
     
 
 def exists_in_pdc(db: Session, per: str) -> bool:

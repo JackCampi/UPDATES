@@ -40,6 +40,9 @@ def read_csv(table: Table, insert: InsertConf, temporal: bool = False, posfix = 
 def build_try_sql_path(insert: InsertConf, name: str) -> str:
     return __build_in_folder_path(insert, name, 'TRY.sql')
 
+def build_not_found_report_path(insert: InsertConf, name: str) -> str:
+    return __build_in_folder_path(insert, name, 'NOT_FOUND.xlsx')
+
 def write_pes_errors(err: set, insert: InsertConf, name: str):
     
     path = build_tmp_csv_path(insert, name)
@@ -49,7 +52,7 @@ def write_pes_errors(err: set, insert: InsertConf, name: str):
     file.close()
 
 def __build_notfound_csv_path(insert: InsertConf, name: str) -> str:
-    return __build_in_folder_path(insert, name, 'NOTFOUND.csv')
+    return build_tmp_csv_path(insert, name, '.NOTFOUND')
 
 def write_not_found(err: set, insert: InsertConf, name: str):
     path = __build_notfound_csv_path(insert, name)
@@ -69,7 +72,7 @@ def read_equiv_table(name: str) -> pd.DataFrame:
     return csv
 
 def read_not_found(insert: InsertConf, name: str) -> pd.DataFrame:
-    path = __build_in_folder_path(insert, name, 'NOTFOUND.csv')
+    path = __build_notfound_csv_path(insert, name)
     csv = pd.read_csv(path, sep=";", names=['DOCUMENTO', 'COD_PROGRAMA'], dtype=str)
     print_message("NOTFOUND READED", message=csv)
     return csv

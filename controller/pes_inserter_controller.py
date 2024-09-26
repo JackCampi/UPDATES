@@ -12,6 +12,7 @@ from .enrolled_controller import run_enrolled_checker
 from .inserter_controller import run_inserter
 from .per_controller import insert_tmp_per
 from .pes_controller import insert_tmp_pes
+from .report_controller import not_found_report
 
 def run_pes_inserter(name: str, insert: InsertConf, db: Session, check_other_carrers: bool = True) -> str:
     table = get_table(name)
@@ -89,8 +90,13 @@ def run_complete_pes_inserter(name: str, insert: InsertConf, check_carrer: bool,
     original_inserter.seq = "0"+str(nseq)
     final_path = run_pes_inserter(name, original_inserter, db, check_carrer)
 
+    #8. post, run report module
+
+    report = not_found_report(name, original_inserter, db)
+
     return{
         "PER" : per_path,
         "PES" : pes_path,
-        name : final_path
+        name : final_path,
+        "REPORT" : report
     }
