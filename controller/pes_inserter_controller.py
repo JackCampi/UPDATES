@@ -60,38 +60,71 @@ def run_complete_pes_inserter(name: str, insert: InsertConf, check_carrer: bool,
     original_inserter = copy.deepcopy(insert)
 
     #0. remove tmp data
+    print_message('test0')
+    print(insert)
+    print(original_inserter)
+    print(name)
+    
 
     #1. we generate no-problem registers & pes errors
     insert.seq = "0"+str(+ nseq)
+    print_message('test1')
+    print(insert)
+    print(original_inserter)
+    print(name)
     run_pes_inserter(name, insert, db, check_carrer)
 
     #2. we check in enrolled students
+    print_message('test2')
+    print(insert)
+    print(original_inserter)
+    print(name)
     run_enrolled_checker(name, insert, db)
     #3. build PER statements
 
     insert.seq = "0"+str(nseq-2)
+    print_message('test3')
+    print(insert)
+    print(original_inserter)
+    print(name)
     per_path = run_inserter(name, insert, True, 'PER')
 
     #4. build PES statements
 
     insert.seq = "0"+str(nseq-1)
+    print_message('test4')
+    print(insert)
+    print(original_inserter)
+    print(name)
     pes_path = run_inserter(name, insert, True, 'PES')
 
     #5. insert PER
-
+    print_message('test5')
+    print(insert)
+    print(original_inserter)
+    print(name)
     insert_tmp_per(insert, name, db)
 
     #6. insert PES
-
+    print_message('test6')
+    print(insert)
+    print(original_inserter)
+    print(name)
     insert_tmp_pes(insert, name, db)
 
     #7. run again pes inserter & complete procedure
-
+    print_message('test7')
+    print(insert)
+    print(original_inserter)
+    print(name)
     original_inserter.seq = "0"+str(nseq)
     final_path = run_pes_inserter(name, original_inserter, db, check_carrer)
 
     #8. post, run report module
-
+    print_message('test8')
+    print(insert)
+    print(original_inserter)
+    print(name)
     report = not_found_report(name, original_inserter, db)
 
     return{

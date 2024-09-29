@@ -782,5 +782,77 @@
             "int",
             "int"
         ]
+    },
+    "PROY_INV": {
+        "COLUMNS_NAMES": [
+            "pk_cod_hermes",
+            "cod_quipu",
+            "tipo",
+            "nombre_proyecto",
+            "estado",
+            "lugar_ejecucion",
+            "objetivo",
+            "anio_convocatoria",
+            "tipo_convocatoria",
+            "convocatoria",
+            "modalidad",
+            "fk_per_investigador_principal",
+            "horas_dedicacion_investigador_principal",
+            "fk_dpa_instituto",
+            "fecha_propuesto",
+            "fecha_inicio",
+            "fecha_final_programada",
+            "fecha_final_con_prorrogas",
+            "valor_personal_un",
+            "total_recursos_internos",
+            "total_recursos_financiadoras_externas",
+            "total_recursos_especie_financiadoras_externas",
+            "total_entidades_participantes",
+            "fecha_aprobacion",
+            "valor_ejecutado",
+            "valor_contrapartida_un",
+            "fecha_de_cambio_de_estado_a_finalizado"
+        ],
+        "COLUMNS_TYPES": [
+            "int",
+            "str",
+            "str",
+            "str",
+            "str",
+            "str",
+            "str",
+            "int",
+            "str",
+            "str",
+            "str",
+            "str",
+            "int",
+            "int",
+            "str",
+            "str",
+            "str",
+            "str",
+            "int",
+            "int",
+            "int",
+            "int",
+            "int",
+            "str",
+            "int",
+            "int",
+            "str"
+        ]
+    },
+    "PES_PROY_INV": {
+        "COLUMNS_NAMES": [
+            "pfk_cod_hermes",
+            "pfk_per",
+            "pfk_pro"
+        ],
+        "COLUMNS_TYPES": [
+            "int",
+            "str",
+            "int"
+        ]
     }
 }

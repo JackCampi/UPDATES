@@ -1,11 +1,13 @@
 from sqlalchemy.orm import Session
+from sqlalchemy.exc import IntegrityError
 from sqlalchemy import text
 from ..schema.PER import PER
 from ..schema.PES import PES
 from ..schema.PDC import PDC
 from ..schema.QPR import QPR
 from ..schema.PRO import PRO
-from ..utils.message import print_message
+from ..utils.message import print_message, print_debug
+from ..exception.sql_error import SQLError
 
 from ..model.table_key import TableKey
 
@@ -73,10 +75,15 @@ def run_script(db: Session, path: str):
                     db.commit()
 
                 # Assert in case of error
-                except Exception as e:
-                    msg = f'comand: {sql_command} \n err: {e}'
-                    print_message("OPS" , msg)
-                    err.append(sql_command)
+                except IntegrityError as e:
+
+                    code, cause = e.__cause__.args
+
+                    sql_err = SQLError(1, cause, e.statement)
+                    print_message( "OPS", str(sql_err))
+
+                    err.append(sql_err.to_json())
+                    
 
                 # Finally, clear command string
                 finally:

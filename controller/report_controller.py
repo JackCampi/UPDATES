@@ -40,5 +40,6 @@ def not_found_report(name: str, insert: InsertConf, db: Session):
                 cell.font = Font(bold=True)
                 cell.fill = PatternFill(fill_type="solid", start_color="E49EDD", end_color="E49EDD")
     return{
-        "FINITI" : True
+        "FINITI" : True,
+        "PATH": path
     }
