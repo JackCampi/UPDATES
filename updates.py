@@ -28,6 +28,15 @@ async def unicorn_exception_handler(request: Request, exc: EquivalenceError):
         } ,
     )
 
+@app.exception_handler(FileNotFoundError)
+async def unicorn_exception_handler(request: Request, exc: FileNotFoundError):
+    return JSONResponse(
+        status_code=404,
+        content={
+            "FILE NOT FOUND" : str(exc)
+        } ,
+    )
+
 @app.get("/")
 async def root():
     return {"message": "Hello World"}

@@ -17,7 +17,8 @@ def run_inserter(name: str, insert: InsertConf, temporal: bool = False, posfix: 
     
     if temporal: 
         table.name = posfix
-        #insert.folder = name
+        if insert.folder == '' :
+            insert.folder = name
     out = __build_inserts(table, insert, csv)
     return out
 

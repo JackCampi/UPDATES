@@ -32,7 +32,7 @@ def get_upload_folder_codes(name: str) -> list:
     comands.append("cd ..")
     comands.append("cd ..")
     comands.append("cd ./UAPA/vm/ ")
-    comands.append(f'scp -r -i "UAPA-prod-vm-1.pem" .\{name} ec2-user@ec2-3-13-103-119.us-east-2.compute.amazonaws.com:~/uapapp/updates/{name}')
+    comands.append(f'scp -r -i "UAPA-prod-vm-1.pem" ./{name} ec2-user@ec2-3-13-103-119.us-east-2.compute.amazonaws.com:~/uapapp/updates/{name}')
     comands.append('ssh -i "UAPA-prod-vm-1.pem" ec2-user@ec2-3-13-103-119.us-east-2.compute.amazonaws.com')
     comands.append(f'ls uapapp/updates/{name}')
     comands.append(f'docker cp "./uapapp/updates/{name}" uapapp-uapapp-database-1:"/updates/{name}"')

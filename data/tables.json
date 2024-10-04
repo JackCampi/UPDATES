@@ -854,5 +854,23 @@
             "str",
             "int"
         ]
+    },
+    "PES_INCE": {
+        "COLUMNS_NAMES": [
+            "pfk_per",
+            "pfk_pro",
+            "pfk_pac",
+            "pk_inc",
+            "acto_administrativo",
+            "dsc"
+        ],
+        "COLUMNS_TYPES": [
+            "str",
+            "int",
+            "int",
+            "str",
+            "str",
+            "str"
+        ]
     }
 }

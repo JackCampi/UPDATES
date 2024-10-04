@@ -1,6 +1,6 @@
 import pandas as pd
 
-from ..utils.message import print_message
+from ..utils.message import print_message, print_debug
 from ..controller.utils.pro_utils import fix_carrers
 
 COLUMNS_NAMES = [
@@ -76,6 +76,7 @@ COLUMNS_NAMES = [
 
 def load_enrolled(year: str) -> pd.DataFrame :
     f = pd.read_csv(f'./data/enrolled/enrolled_{year}.csv', header=None, sep=";", names=COLUMNS_NAMES, encoding='utf8', dtype=str)
+    print_debug(f)
     f['COD_PLAN'] = fix_carrers(f["COD_PLAN"])
     print_message('ENROLLED READED', f)
     return f
