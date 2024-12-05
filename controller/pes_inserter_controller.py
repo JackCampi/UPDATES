@@ -4,7 +4,7 @@ from ..model.table import Table
 from ..model.insert_conf import InsertConf
 from ..data_management.data_connector import read_csv, build_try_sql_path, write_pes_errors
 from ..data_management.tables_columns import get_table
-from ..utils.message import print_message
+from ..utils.message import print_message, print_debug
 from .utils.inserter_utils import build_statement
 from sqlalchemy.orm import Session
 from .db_controller import exists_in_pes, get_carrer_in_pes
@@ -27,7 +27,7 @@ def __build_inserts(table: Table, insert: InsertConf, seq: pd.DataFrame, db: Ses
     PES_ERRORS = set()
 
     for i in seq.index:
-
+        print_debug(i)
         k_per = 'pfk_per' if 'pfk_per' in table.column_names else 'fk_per'
         k_pro = 'pfk_pro' if 'pfk_pro' in table.column_names else 'fk_pro'
         per = seq[k_per][i]
@@ -35,6 +35,7 @@ def __build_inserts(table: Table, insert: InsertConf, seq: pd.DataFrame, db: Ses
         key = f'{per};{pro}'
 
         if not exists_in_pes(db, per, pro):
+            print_debug(i)
             if check_other_carrers:
                 pro = get_carrer_in_pes(db, per)
                 if pro == -1:
@@ -47,11 +48,14 @@ def __build_inserts(table: Table, insert: InsertConf, seq: pd.DataFrame, db: Ses
                 continue
                             
         row = seq.iloc[[i]]
+        print_debug(row)
         row.at[i, k_pro] = int(pro)
         statement = build_statement(table, insert, row)
+        print_debug(statement)
         file.write(statement)
     file.close()
     print_message('PES INSERTER', f'FINITI: {table.name}')
+    print_debug(PES_ERRORS)
     write_pes_errors(PES_ERRORS, insert, table.name)
     return file_path
 

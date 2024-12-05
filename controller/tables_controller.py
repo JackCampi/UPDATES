@@ -7,7 +7,7 @@ from pydantic import Json
 from sqlalchemy.orm import Session
 import pandas as pd
 from io import StringIO
-from ..utils.message import print_message
+from ..utils.message import print_message,print_debug
 from ..data_management.data_connector import write_tmp_file, read_equiv_table
 from .db_controller import exists_key_in_table, get_changable_keys_in_table, run_command
 

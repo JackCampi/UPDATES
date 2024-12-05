@@ -872,5 +872,97 @@
             "str",
             "str"
         ]
+    },
+    "PET": {
+        "COLUMNS_NAMES": [
+            "fk_per",
+            "fk_niv",
+            "fk_ins",
+            "titulo",
+            "max_escala",
+            "min_ap",
+            "ini_est",
+            "fin_est"
+        ],
+        "COLUMNS_TYPES": [
+            "str",
+            "int",
+            "int",
+            "str",
+            "str",
+            "str",
+            "str",
+            "str"
+        ]
+    },
+    "PRO": {
+        "COLUMNS_NAMES": [
+            "pk_id",
+            "fk_niv",
+            "fk_acr",
+            "nom",
+            "tit_pro",
+            "SNIES"
+        ],
+        "COLUMNS_TYPES": [
+            "int",
+            "int",
+            "int",
+            "str",
+            "str",
+            "int"
+        ]
+    },
+    "PDC_DIST": {
+        "COLUMNS_NAMES": [
+            "fk_per",
+            "fk_pac",
+            "fk_ins",
+            "item",
+            "titulo",
+            "tipo",
+            "ciudad",
+            "observaciones"
+        ],
+        "COLUMNS_TYPES": [
+            "str",
+            "int",
+            "int",
+            "str",
+            "str",
+            "str",
+            "str",
+            "str"
+        ]
+    },
+    "DIS": {
+        "COLUMNS_NAMES": [
+            "pk_id",
+            "fk_ins",
+            "nom"
+        ],
+        "COLUMNS_TYPES": [
+            "int",
+            "int",
+            "str"
+        ]
+    },
+    "PES_DIST": {
+        "COLUMNS_NAMES": [
+            "pfk_dis",
+            "pfk_pac",
+            "pfk_per",
+            "pfk_pro",
+            "descripcion",
+            "acto_adm"
+        ],
+        "COLUMNS_TYPES": [
+            "int",
+            "int",
+            "str",
+            "int",
+            "str",
+            "str"
+        ]
     }
 }

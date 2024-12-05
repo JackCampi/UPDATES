@@ -7,6 +7,8 @@ from ..model.table import Table
 from ..utils.message import print_message
 from sqlalchemy.orm import Session
 from .db_controller import get_carrer_in_pes
+from ..data_management.data_connector import write_tmp_file
+from io import StringIO
 
 def run_enrolled_checker(name: str, insert: InsertConf, db: Session) -> str:
     table = Table(
@@ -132,4 +134,22 @@ def check_per_in_enrolled(year: str, name: str, per: pd.DataFrame) -> pd.DataFra
     per_file.close()
     return per
 
-        
+def search_pbm(bytes: bytes, year: int):
+    enrolled = load_enrolled(year)
+    data_str = bytes.decode('utf-8')
+    table = pd.read_csv(StringIO(data_str), dtype= str, sep=";")
+    print_message('CSV READED', table)
+
+    pbm = []
+
+    for i in table.index:
+        per = table['per'][i]
+        pro = table['pro'][i]
+        filter = __getFilter(enrolled, per, pro)
+        if filter.empty:
+            pbm.append("No info")
+        else:
+            pbm.append(filter['PBM'][filter.index[0]])
+    
+    table['pbm'] = pbm
+    return write_tmp_file('PBM', table)
