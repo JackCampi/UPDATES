@@ -1,6 +1,7 @@
 import pandas as pd
 from ...model.table import Table
 from ...model.insert_conf import InsertConf
+from ...utils.message import print_debug
 
 #for future, istead of require the table and index, require only the row
 
@@ -31,4 +32,27 @@ def build_statement(table: Table, insert: InsertConf, seq: pd.DataFrame) -> str:
         elif table.column_types[index] == "int":
             statement += f'{seq[table.column_names[index]][i]},'
     statement = statement[:-1] + ");\n"
+    return statement
+
+def replace_statement(table: Table, insert: InsertConf, seq: pd.DataFrame) -> str:
+    i = seq.index[0]
+
+    statement = f'UPDATE {table.name} SET '
+    where = ''
+
+    for index in range(len(table.column_names)):
+
+        if ('pk' in table.column_names[index]) or ('pfk' in table.column_names[index]):
+            where += f' and {table.column_names[index]} = "{seq[table.column_names[index]][i]}"'
+
+        if ('pk' in table.column_names[index]) or ('pfk' in table.column_names[index]) or ('fk' in table.column_names[index]):
+            continue
+        elif pd.isna(seq[table.column_names[index]][i]) or seq[table.column_names[index]][i] == "#N/D":
+            statement += f'{table.column_names[index]} = NULL,'
+        elif table.column_types[index] == "str":
+            statement += f'{table.column_names[index]} = "{seq[table.column_names[index]][i]}",'
+        elif table.column_types[index] == "int":
+            statement += f'{table.column_names[index]} = {seq[table.column_names[index]][i]},'
+
+    statement = statement[:-1] + ' WHERE ' + where[5:] + ";\n"
     return statement

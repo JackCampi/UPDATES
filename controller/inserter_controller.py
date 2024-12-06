@@ -3,7 +3,7 @@ from ..model.table import Table
 from ..model.insert_conf import InsertConf
 from ..data_management.data_connector import read_csv, build_try_sql_path
 from ..data_management.tables_columns import get_table
-from ..utils.message import print_message
+from ..utils.message import print_message, print_debug
 from .utils.inserter_utils import build_statement
 
 
@@ -13,8 +13,11 @@ def run_inserter(name: str, insert: InsertConf, temporal: bool = False, posfix: 
         table.name = name
     else:
         table = get_table(name)
+    print_debug(table)
+    print_debug(insert)
+    print_debug(temporal)
+    print_debug(posfix)
     csv = read_csv(table, insert, temporal, posfix)
-    
     if temporal: 
         table.name = posfix
         if insert.folder == '' :

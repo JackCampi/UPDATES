@@ -1,6 +1,6 @@
 from fastapi import FastAPI, Request
 from fastapi.responses import JSONResponse
-from .router import inserter, tables, db, pro, tutorial, restore, qpr, report, enrolled
+from .router import inserter, tables, db, pro, tutorial, restore, qpr, report, enrolled, mat
 from .database import engine
 from .schema import PER, PES
 from .exception.equiv_error import EquivalenceError
@@ -18,6 +18,7 @@ app.include_router(restore.router)
 app.include_router(qpr.router)
 app.include_router(report.router)
 app.include_router(enrolled.router)
+app.include_router(mat.router)
 
 @app.exception_handler(EquivalenceError)
 async def unicorn_exception_handler(request: Request, exc: EquivalenceError):

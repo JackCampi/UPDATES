@@ -24,7 +24,7 @@ def get_table_backup_codes(name: str) -> list:
     comands.append('ls uapapp/backups')
     comands.append('exit')
 
-    comands.append(f'scp -i UAPA-prod-vm-1.pem ec2-user@ec2-3-13-103-119.us-east-2.compute.amazonaws.com:uapapp/backups/{file} /UAPA/UPDATES/data/backups')
+    comands.append(f'scp -i UAPA-prod-vm-1.pem ec2-user@ec2-3-13-103-119.us-east-2.compute.amazonaws.com:uapapp/backups/{file} /Users/dangel/Documents/UAPA/UPDATES/data/backups')
     return comands
 
 def get_upload_folder_codes(name: str) -> list:

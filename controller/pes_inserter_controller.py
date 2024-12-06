@@ -27,7 +27,6 @@ def __build_inserts(table: Table, insert: InsertConf, seq: pd.DataFrame, db: Ses
     PES_ERRORS = set()
 
     for i in seq.index:
-        print_debug(i)
         k_per = 'pfk_per' if 'pfk_per' in table.column_names else 'fk_per'
         k_pro = 'pfk_pro' if 'pfk_pro' in table.column_names else 'fk_pro'
         per = seq[k_per][i]
@@ -35,7 +34,6 @@ def __build_inserts(table: Table, insert: InsertConf, seq: pd.DataFrame, db: Ses
         key = f'{per};{pro}'
 
         if not exists_in_pes(db, per, pro):
-            print_debug(i)
             if check_other_carrers:
                 pro = get_carrer_in_pes(db, per)
                 if pro == -1:
@@ -48,10 +46,8 @@ def __build_inserts(table: Table, insert: InsertConf, seq: pd.DataFrame, db: Ses
                 continue
                             
         row = seq.iloc[[i]]
-        print_debug(row)
         row.at[i, k_pro] = int(pro)
         statement = build_statement(table, insert, row)
-        print_debug(statement)
         file.write(statement)
     file.close()
     print_message('PES INSERTER', f'FINITI: {table.name}')
@@ -64,71 +60,44 @@ def run_complete_pes_inserter(name: str, insert: InsertConf, check_carrer: bool,
     original_inserter = copy.deepcopy(insert)
 
     #0. remove tmp data
-    print_message('test0')
-    print(insert)
-    print(original_inserter)
-    print(name)
-    
 
     #1. we generate no-problem registers & pes errors
     insert.seq = "0"+str(+ nseq)
-    print_message('test1')
-    print(insert)
-    print(original_inserter)
-    print(name)
+    print_debug('test1')
     run_pes_inserter(name, insert, db, check_carrer)
 
     #2. we check in enrolled students
-    print_message('test2')
-    print(insert)
-    print(original_inserter)
-    print(name)
+    print_debug('test2')
     run_enrolled_checker(name, insert, db)
     #3. build PER statements
 
     insert.seq = "0"+str(nseq-2)
-    print_message('test3')
-    print(insert)
-    print(original_inserter)
-    print(name)
+    print_debug('test3')
     per_path = run_inserter(name, insert, True, 'PER')
+    print_debug(per_path)
 
     #4. build PES statements
 
     insert.seq = "0"+str(nseq-1)
-    print_message('test4')
-    print(insert)
-    print(original_inserter)
-    print(name)
+    print_debug('test4')
     pes_path = run_inserter(name, insert, True, 'PES')
+    print_debug(pes_path)
 
     #5. insert PER
-    print_message('test5')
-    print(insert)
-    print(original_inserter)
-    print(name)
+    print_debug('test5')
     insert_tmp_per(insert, name, db)
 
     #6. insert PES
-    print_message('test6')
-    print(insert)
-    print(original_inserter)
-    print(name)
+    print_debug('test6')
     insert_tmp_pes(insert, name, db)
 
     #7. run again pes inserter & complete procedure
-    print_message('test7')
-    print(insert)
-    print(original_inserter)
-    print(name)
+    print_debug('test7')
     original_inserter.seq = "0"+str(nseq)
     final_path = run_pes_inserter(name, original_inserter, db, check_carrer)
 
     #8. post, run report module
     print_message('test8')
-    print(insert)
-    print(original_inserter)
-    print(name)
     report = not_found_report(name, original_inserter, db)
 
     return{

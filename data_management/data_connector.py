@@ -1,7 +1,7 @@
 import pandas as pd
 from ..model.table import Table
 from ..model.insert_conf import InsertConf
-from ..utils.message import print_message
+from ..utils.message import print_message, print_debug
 
 def __build_in_folder_path(insert: InsertConf, name: str, posfix: str) -> str:
     semester = insert.semester
@@ -33,6 +33,7 @@ def read_csv(table: Table, insert: InsertConf, temporal: bool = False, posfix = 
         path = build_tmp_csv_path(insert, table.name, posfix)
     else:
         path = __build_data_csv_path(insert, table.name)
+    print_debug(path)
     csv = pd.read_csv(path, header=None, sep=";", names=table.column_names, encoding='utf8')
     print_message('CSV READED', csv)
     return csv

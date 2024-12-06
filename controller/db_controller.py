@@ -6,6 +6,8 @@ from ..schema.PES import PES
 from ..schema.PDC import PDC
 from ..schema.QPR import QPR
 from ..schema.PRO import PRO
+from ..schema.MAT_OAGR import MAT_OAGR
+from ..schema.PES_MATE import PES_MATE
 from ..utils.message import print_message, print_debug
 from ..exception.sql_error import SQLError
 
@@ -103,16 +105,45 @@ def exists_in_qpr(db: Session, qpr: int) -> bool:
     return not(db.query(QPR).filter(QPR.pk_id == qpr).first() == None)
 
 def exists_key_in_table(db: Session, keys : list[TableKey], name: str) -> bool :
-    conditions = [f'{x.name} = "{x.value}"' for x in keys]
+    conditions = [f'{x.name}= "{x.value}"' for x in keys]
     query = f'select * from {name} where {" and ".join(conditions)}'
     result = db.execute(text(query))
     return not(result.first() == None)
 
 def get_changable_keys_in_table(db: Session, keys : list[TableKey], name: str):
-    conditions = [f'{x.name} = "{x.value}"' for x in keys]
+    conditions = [f'{x.name}= "{x.value}"' for x in keys]
     query = f'select * from {name} where {" and ".join(conditions)}'
     result = db.execute(text(query))
     return str(result.first())
 
 def get_pro_name(db: Session, pro: str) -> str:
     return db.query(PRO).filter(PRO.pk_id == pro).first().nom
+
+def get_pes_mate(db: Session, per: str, pac: str, pro:str, mat: str, acc_not_included: list = []) -> PES_MATE:
+    return db.query(PES_MATE).filter(
+        PES_MATE.pfk_per == per,
+        PES_MATE.pfk_pac == pac,
+        PES_MATE.pfk_pro == pro,
+        PES_MATE.pfk_mat == mat,
+        PES_MATE.tipo_asignatura not in acc_not_included
+    ).first()
+
+def exist_mat_first_group(db: Session, mat: str, pac: str, dpa: str, group: str) -> MAT_OAGR:
+    return not (db.query(MAT_OAGR).filter(
+        MAT_OAGR.pfk_mat == mat,
+        MAT_OAGR.pfk_pac == pac,
+        MAT_OAGR.pfk_dpa == dpa,
+        MAT_OAGR.pk_grupo == group
+    ).first() == None)
+
+def get_mat_first_group(db: Session, mat: str, pac: str) -> MAT_OAGR:
+    return db.query(MAT_OAGR).filter(
+        MAT_OAGR.pfk_mat == mat,
+        MAT_OAGR.pfk_pac == pac
+    ).first()
+
+def get_mat_gr_no_pac(db: Session, mat: str) -> MAT_OAGR:
+    return db.query(MAT_OAGR).filter(
+        MAT_OAGR.pfk_mat == mat,
+        not MAT_OAGR.pfk_dpa == 1
+    ).first()
